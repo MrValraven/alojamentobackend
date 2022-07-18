@@ -1,0 +1,16 @@
+20220715	04:39:09	cd82372b-d563-4a47-af9b-e9752066a2f4	GET	undefined	/
+20220715	04:40:38	25e8b51b-cccc-4653-92ef-b019fe9ae3a0	GET	undefined	/
+20220715	05:22:48	f4c87418-a75d-4b56-a66e-b1b625fd03f9	GET	undefined	/
+20220715	05:23:11	f5db32b5-59c9-488a-8d79-2bc3b5e8f9b1	GET	undefined	/
+20220715	05:24:22	2c3b6f27-a723-409f-9e0b-857ab6939fcc	GET	undefined	/
+20220715	05:26:49	06aeb95c-7457-442c-b18c-78eb31e2d46b	GET	undefined	/
+20220715	05:26:53	740676a2-12d8-47e6-9e9d-c9c283786c99	GET	undefined	/tiago
+20220715	05:26:58	2f2dc867-6224-4894-ac94-ca3055448d3c	GET	undefined	/
+20220715	05:35:11	1896f014-c48a-4231-8b8e-c468ec5cca2b	GET	undefined	/subdir
+20220715	05:35:32	da5b339d-5a49-4df8-9af7-0d913c2d2bb9	GET	undefined	/subdir/hfd
+20220718	16:02:27	69319e04-e936-424d-b637-ab288cd505ff	POST	undefined	/register
+20220718	16:03:32	1d1b916d-c9c5-4d20-98cb-fd21e3dcdefa	POST	undefined	/register
+20220718	16:05:14	1befd80f-a569-4df8-bd56-8e81ee7b1726	POST	undefined	/register
+20220718	16:05:43	75afd248-d853-4ad3-973d-6e5647b9691a	POST	undefined	/register
+20220718	16:31:53	c8d434a3-8aba-491e-8519-13cf0407f8c6	POST	undefined	/register
+20220718	16:33:30	1b059b51-c449-4edc-a336-e1d34a6a0556	POST	undefined	/register
