@@ -1,13 +1,8 @@
-const usersDB = {
-  users: require("../model/users.json"),
-  setUsers: function (data) {
-    this.users = data;
-  },
-};
+const User = require("../model/User");
 
 const jwt = require("jsonwebtoken");
 
-const handleRefreshToken = (request, response) => {
+const handleRefreshToken = async (request, response) => {
   const cookies = request.cookies;
 
   if (!cookies?.jwt) {
@@ -18,9 +13,7 @@ const handleRefreshToken = (request, response) => {
 
   const refreshToken = cookies.jwt;
 
-  const userFoundInDatabase = usersDB.users.find(
-    (user) => user.refreshToken === refreshToken
-  );
+  const userFoundInDatabase = await User.findOne({ email: email }).exec();
 
   if (!userFoundInDatabase) return response.sendStatus(403); // Forbidden
 
@@ -30,11 +23,11 @@ const handleRefreshToken = (request, response) => {
     refreshToken,
     process.env.REFRESH_TOKEN_SECRET,
     (error, decoded) => {
-      if (error || userFoundInDatabase.username !== decoded.username)
+      if (error || userFoundInDatabase.email !== decoded.email)
         return response.sendStatus(403);
 
       const acessToken = jwt.sign(
-        { username: decoded.username },
+        { email: decoded.email },
         process.env.ACCESS_TOKEN_SECRET,
         { expiresIn: "30s" }
       );

@@ -1,0 +1,1 @@
+20220805	22:23:28	71ce86af-9f1f-4586-8f16-d1f3ca43cf39	FROM:http://127.0.0.1:5173 | Error: Not allowed by CORS
