@@ -1,25 +1,30 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
 const cors = require("cors");
 const { logger } = require("./middleware/logEvents");
 const { errorHandler } = require("./middleware/errorHandler");
+const verifyJWT = require("./middleware/verifyJWT");
+const credentials = require("./middleware/credentials");
+const cookieParser = require("cookie-parser");
 const subdirRouter = require("./routes/subdir");
+const corsOptions = require("./config/corsOptions");
+const mongoose = require("mongoose");
+const connectToDatabase = require("./config/databaseConnection");
 const PORT = process.env.PORT || 3500;
+
+// Connect to MongoDB
+connectToDatabase();
 
 // Custom middleware logger
 app.use(logger);
-const whitelist = ["https://mywebsite.com", "https://www.mywebsite.com"];
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  optionsSucessStatus: 200,
-};
+
+// Handle options credentials check - before CORS!
+// and fetch cookies credentials requirement
+app.use(credentials);
+
+// CORS
 app.use(cors(corsOptions));
 
 // Middleware to handle urlenconded datam ie: form data
@@ -28,6 +33,9 @@ app.use(express.urlencoded({ extended: false }));
 
 // Middleware for json
 app.use(express.json());
+
+//middleware for cookies
+app.use(cookieParser());
 
 // serve static files
 app.use("/", express.static(path.join(__dirname, "/public")));
@@ -41,6 +49,11 @@ app.get("/", (req, res) => {
 
 //routes
 app.use("/register", require("./routes/register"));
+app.use("/auth", require("./routes/auth"));
+app.use("/refresh", require("./routes/refresh"));
+app.use("/logout", require("./routes/logout"));
+
+app.use(verifyJWT);
 
 app.all("*", (req, res) => {
   res.status(404);
@@ -56,6 +69,10 @@ app.all("*", (req, res) => {
 
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+mongoose.connection.once("open", () => {
+  console.log("Connected to MongoDB database");
+
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 });
