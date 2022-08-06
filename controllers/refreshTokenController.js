@@ -23,16 +23,24 @@ const handleRefreshToken = async (request, response) => {
     refreshToken,
     process.env.REFRESH_TOKEN_SECRET,
     (error, decoded) => {
-      if (error || userFoundInDatabase.email !== decoded.email)
+      if (error || userFoundInDatabase.email !== decoded.email) {
         return response.sendStatus(403);
+      }
+
+      const roles = Object.values(userFoundInDatabase.roles);
 
       const acessToken = jwt.sign(
-        { email: decoded.email },
+        {
+          UserInfo: {
+            email: decoded.email,
+            roles: roles,
+          },
+        },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: "30s" }
+        { expiresIn: "10s" }
       );
 
-      response.json({ acessToken });
+      response.json({ acessToken, roles });
     }
   );
 };

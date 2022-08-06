@@ -26,12 +26,14 @@ const handleLogin = async (request, response) => {
   );
 
   if (isPasswordCorrect) {
+    const roles = Object.values(foundUser.roles).filter(Boolean);
+
     // create JWTs
-    const acessToken = jwt.sign(
+    const accessToken = jwt.sign(
       { email: userFoundInDatabase.email },
       process.env.ACCESS_TOKEN_SECRET,
       {
-        expiresIn: "900s",
+        expiresIn: "10s",
       }
     );
 
@@ -50,13 +52,16 @@ const handleLogin = async (request, response) => {
     console.log(result);
 
     const ONE_DAY_IN_MILISECONDS = 24 * 60 * 60 * 1000;
+
     response.cookie("jwt", refreshToken, {
       httpOnly: true,
       sameSite: "None",
       secure: true,
       maxAge: ONE_DAY_IN_MILISECONDS,
     });
-    response.status(200).json({ message: "Login sucessfull" });
+    response
+      .status(200)
+      .json({ message: "Login sucessfull", accessToken, roles });
   } else {
     response.status(401).json({ message: "Wrong password" });
   }
