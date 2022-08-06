@@ -10,7 +10,7 @@ const getAllUsers = async (request, response) => {
     email: user.email,
     roles: user.roles,
   }));
-  console.log("users:", usersInDatabase);
+
   response.json(usersInDatabase);
 };
 
