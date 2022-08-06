@@ -6,14 +6,14 @@ const handleRefreshToken = async (request, response) => {
   const cookies = request.cookies;
 
   if (!cookies?.jwt) {
-    return res.sendStatus(401);
+    return response.sendStatus(401);
   }
-
-  console.log(cookies.jwt);
 
   const refreshToken = cookies.jwt;
 
-  const userFoundInDatabase = await User.findOne({ email: email }).exec();
+  const userFoundInDatabase = await User.findOne({
+    refreshToken: refreshToken,
+  }).exec();
 
   if (!userFoundInDatabase) return response.sendStatus(403); // Forbidden
 
@@ -29,7 +29,7 @@ const handleRefreshToken = async (request, response) => {
 
       const roles = Object.values(userFoundInDatabase.roles);
 
-      const acessToken = jwt.sign(
+      const accessToken = jwt.sign(
         {
           UserInfo: {
             email: decoded.email,
@@ -40,7 +40,7 @@ const handleRefreshToken = async (request, response) => {
         { expiresIn: "10s" }
       );
 
-      response.json({ acessToken, roles });
+      response.json({ accessToken, roles });
     }
   );
 };

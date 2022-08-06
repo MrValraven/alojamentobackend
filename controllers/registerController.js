@@ -17,7 +17,7 @@ const handleNewUser = async (req, res) => {
 
   if (duplicateUser)
     return res
-      .send(409)
+      .status(409)
       .json({ message: "Email is already in use by another user" }); // Conflict
 
   try {

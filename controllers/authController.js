@@ -26,7 +26,7 @@ const handleLogin = async (request, response) => {
   );
 
   if (isPasswordCorrect) {
-    const roles = Object.values(foundUser.roles).filter(Boolean);
+    const roles = Object.values(userFoundInDatabase.roles).filter(Boolean);
 
     // create JWTs
     const accessToken = jwt.sign(
