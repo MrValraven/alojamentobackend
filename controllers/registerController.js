@@ -28,6 +28,10 @@ const handleNewUser = async (req, res) => {
     const newUser = await User.create({
       email: email,
       password: hashedPassword,
+      username: "",
+      name: "",
+      phoneNumber: "",
+      posts: [],
     });
 
     console.log(newUser);

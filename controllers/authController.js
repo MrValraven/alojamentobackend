@@ -51,6 +51,12 @@ const handleLogin = async (request, response) => {
     const result = await userFoundInDatabase.save();
     console.log(result);
 
+    const username = userFoundInDatabase.username;
+    const email = userFoundInDatabase.email;
+    const name = userFoundInDatabase.name;
+    const phoneNumber = userFoundInDatabase.phoneNumber;
+    const posts = userFoundInDatabase.posts;
+
     const ONE_DAY_IN_MILISECONDS = 24 * 60 * 60 * 1000;
 
     response.cookie("jwt", refreshToken, {
@@ -59,9 +65,16 @@ const handleLogin = async (request, response) => {
       secure: true,
       maxAge: ONE_DAY_IN_MILISECONDS,
     });
-    response
-      .status(200)
-      .json({ message: "Login sucessfull", accessToken, roles });
+    response.status(200).json({
+      message: "Login sucessfull",
+      username,
+      email,
+      name,
+      phoneNumber,
+      accessToken,
+      roles,
+      posts,
+    });
   } else {
     response.status(401).json({ message: "Wrong password" });
   }
