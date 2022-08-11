@@ -1,6 +1,6 @@
 const allowedOrigins = [
-  "https://mywebsite.com",
-  "https://www.mywebsite.com",
+  "https://alojamentoasap.vercel.app",
+  "https://www.alojamentoasap.vercel.app",
   "http://127.0.0.1:5173",
   "http://localhost:5173/",
 ];

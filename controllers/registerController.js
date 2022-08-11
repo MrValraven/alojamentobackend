@@ -11,7 +11,7 @@ const handleNewUser = async (req, res) => {
       .json({ message: "Username and password are required" });
   }
 
-  //Check for duplicate emails in Database
+  //Check if email is already in used in Database
 
   const duplicateUser = await User.findOne({ email: email }).exec();
 
