@@ -9,14 +9,16 @@ const editUserInfo = async (request, response) => {
       .json({ message: "Email and parameters are required" });
   }
 
-  const isParameterValueAlreadyInUse = await User.findOne({
-    [editParameter]: parameterValue,
-  }).exec();
+  if (editParameter === "email" || editParameter === "username") {
+    const isParameterValueAlreadyInUse = await User.findOne({
+      [editParameter]: parameterValue,
+    }).exec();
 
-  if (isParameterValueAlreadyInUse) {
-    return response
-      .status(409)
-      .json({ message: "Parameter is already in use" });
+    if (isParameterValueAlreadyInUse) {
+      return response
+        .status(409)
+        .json({ message: "Parameter is already in use" });
+    }
   }
 
   const userFoundInDatabase = await User.findOne({
