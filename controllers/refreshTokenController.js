@@ -32,8 +32,11 @@ const handleRefreshToken = async (request, response) => {
       const accessToken = jwt.sign(
         {
           UserInfo: {
+            username: userFoundInDatabase.username,
             email: decoded.email,
             roles: roles,
+            phoneNumber: userFoundInDatabase.phoneNumber,
+            posts: userFoundInDatabase.posts,
           },
         },
         process.env.ACCESS_TOKEN_SECRET,
