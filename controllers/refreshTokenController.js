@@ -35,6 +35,7 @@ const handleRefreshToken = async (request, response) => {
             username: userFoundInDatabase.username,
             email: decoded.email,
             roles: roles,
+            name: userFoundInDatabase.name,
             phoneNumber: userFoundInDatabase.phoneNumber,
             posts: userFoundInDatabase.posts,
           },
