@@ -31,12 +31,12 @@ const sendAccountId = async (request, response) => {
 
   const userFoundInDatabase = await User.findOne({ email: email }).exec();
 
-  console.log(userFoundInDatabase.id.toString());
+  console.log(userFoundInDatabase);
 
   /* if (userFoundInDatabase !== undefined) {
     response
       .status(200)
-      .json({ message: "sucess", id: userFoundInDatabase._id.toString() });
+      .json({ message: "sucess", id: userFoundInDatabase.id.toString() });
   } else {
     console.log(userFoundInDatabase);
   } */
