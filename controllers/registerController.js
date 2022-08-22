@@ -32,6 +32,7 @@ const handleNewUser = async (req, res) => {
       name: "",
       phoneNumber: "",
       posts: [],
+      isVerified: false,
     });
 
     console.log(newUser);
