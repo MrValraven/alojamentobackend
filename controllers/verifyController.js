@@ -30,17 +30,20 @@ const sendAccountId = async (request, response) => {
   const { email } = request.body;
 
   console.log(request.body);
+  console.log("email: ", request.body.email);
   const userFoundInDatabase = await User.findOne({ email: email }).exec();
 
   console.log(userFoundInDatabase);
 
-  if (userFoundInDatabase !== undefined) {
+  /* if (userFoundInDatabase !== undefined) {
     response
       .status(200)
       .json({ message: "sucess", id: userFoundInDatabase.id.toString() });
   } else {
     console.log(userFoundInDatabase);
-  }
+  } */
+
+  response.json({ message: "eh" });
 };
 
 module.exports = { verifyAccount, sendAccountId };
