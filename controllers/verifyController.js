@@ -27,6 +27,7 @@ const verifyAccount = async (request, response) => {
 };
 
 const sendAccountId = async (request, response) => {
+  console.log("request: ", request.body);
   const { email } = request.body;
 
   console.log("email: ", email);
