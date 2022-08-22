@@ -27,22 +27,17 @@ const verifyAccount = async (request, response) => {
 };
 
 const sendAccountId = async (request, response) => {
-  console.log("request: ", request.body);
   const { email } = request.body;
-
-  console.log("email: ", email);
 
   const userFoundInDatabase = await User.findOne({ email: email }).exec();
 
-  console.log(userFoundInDatabase);
-
-  /* if (userFoundInDatabase !== undefined) {
+  if (userFoundInDatabase !== undefined) {
     response
       .status(200)
-      .json({ message: "sucess", id: userFoundInDatabase.id.toString() });
+      .json({ message: "sucess", id: userFoundInDatabase._id.toString() });
   } else {
     console.log(userFoundInDatabase);
-  } */
+  }
 };
 
 module.exports = { verifyAccount, sendAccountId };
