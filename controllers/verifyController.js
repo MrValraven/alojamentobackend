@@ -29,6 +29,8 @@ const verifyAccount = async (request, response) => {
 const sendAccountId = async (request, response) => {
   const { email } = request.body;
 
+  console.log("email: ", email);
+
   const userFoundInDatabase = await User.findOne({ email: email }).exec();
 
   console.log(userFoundInDatabase);
