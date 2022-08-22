@@ -1,13 +1,13 @@
 const User = require("../model/User");
 
 const verifyAccount = async (request, response) => {
-  const { accountID } = request.body;
+  const { id } = request.body;
 
-  if (!accountID) {
-    return response.status(400).json({ message: "accountID is required" });
+  if (!id) {
+    return response.status(400).json({ message: "id is required" });
   }
 
-  const userFoundInDatabase = await User.findOne({ _id: accountID }).exec();
+  const userFoundInDatabase = await User.findOne({ _id: id }).exec();
 
   if (!userFoundInDatabase) {
     return response.status(401).json({ message: "User doesn't exist" });
