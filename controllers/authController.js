@@ -49,7 +49,6 @@ const handleLogin = async (request, response) => {
     userFoundInDatabase.refreshToken = refreshToken;
 
     const result = await userFoundInDatabase.save();
-    console.log(result);
 
     const username = userFoundInDatabase.username;
     const email = userFoundInDatabase.email;
