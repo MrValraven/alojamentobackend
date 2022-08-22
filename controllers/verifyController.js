@@ -35,15 +35,14 @@ const sendAccountId = async (request, response) => {
 
   console.log(userFoundInDatabase);
 
-  /* if (userFoundInDatabase !== undefined) {
+  if (userFoundInDatabase) {
     response
       .status(200)
-      .json({ message: "sucess", id: userFoundInDatabase.id.toString() });
+      .json({ message: "sucess", id: userFoundInDatabase._id.toString() });
   } else {
     console.log(userFoundInDatabase);
-  } */
-
-  response.json({ message: "eh" });
+    res.sendStatus(404);
+  }
 };
 
 module.exports = { verifyAccount, sendAccountId };
