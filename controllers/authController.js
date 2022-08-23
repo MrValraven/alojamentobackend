@@ -25,6 +25,10 @@ const handleLogin = async (request, response) => {
     userFoundInDatabase.password
   );
 
+  if (!userFoundInDatabase.isVerified) {
+    return response.status(401).json({ message: "Account isn't verified" });
+  }
+
   if (isPasswordCorrect) {
     const roles = Object.values(userFoundInDatabase.roles).filter(Boolean);
 
