@@ -55,6 +55,7 @@ app.use("/logout", require("./routes/logout"));
 app.use("/users", require("./routes/users"));
 app.use("/edit", require("./routes/editUserInfo"));
 app.use("/verify", require("./routes/verify"));
+app.use("/email", require("./routes/email"));
 
 app.use(verifyJWT);
 

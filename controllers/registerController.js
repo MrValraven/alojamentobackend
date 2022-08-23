@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
-
 const User = require("../model/User");
+const sendEmail = require("../util/email").sendEmail;
 
 const handleNewUser = async (req, res) => {
   const { email, password } = req.body;
@@ -35,7 +35,12 @@ const handleNewUser = async (req, res) => {
       isVerified: false,
     });
 
-    console.log(newUser);
+    // Send email to verify account
+    console.log("account created");
+
+    const urlToVerifyAccount = `https://alojamentoasap.vercel.app/verificar_conta/${newUser._id.toString()}`;
+
+    sendEmail(newUser.email, urlToVerifyAccount);
 
     res
       .status(201)

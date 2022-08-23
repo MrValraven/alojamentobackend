@@ -6,3 +6,6 @@
 20220822	22:51:17	c6d99add-aeff-4eb4-9b83-fa034d04142a	GET	undefined	/verify
 20220822	22:51:35	f97700b8-9aba-44bb-a9b9-2bea154e4ea6	GET	undefined	/verify
 20220822	22:55:43	8d417d71-999b-44c4-9ea4-aa1eddcc94ed	GET	undefined	/verify
+20220823	13:44:32	05eee234-f937-451e-8221-5030524840ee	GET	undefined	/email
+20220823	13:45:07	535e946b-8718-4696-b1a7-1affe48d2182	GET	undefined	/email
+20220823	13:52:58	bc0ac44e-e647-4f0a-a2c0-589b3c191493	POST	undefined	/register

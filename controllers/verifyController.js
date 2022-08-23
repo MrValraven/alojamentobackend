@@ -26,23 +26,4 @@ const verifyAccount = async (request, response) => {
   }
 };
 
-const sendAccountId = async (request, response) => {
-  const { email } = request.body;
-
-  console.log(request.body);
-  console.log("email: ", request.body.email);
-  const userFoundInDatabase = await User.findOne({ email: email }).exec();
-
-  console.log(userFoundInDatabase);
-
-  if (userFoundInDatabase) {
-    response
-      .status(200)
-      .json({ message: "sucess", id: userFoundInDatabase._id.toString() });
-  } else {
-    console.log(userFoundInDatabase);
-    res.sendStatus(404);
-  }
-};
-
-module.exports = { verifyAccount, sendAccountId };
+module.exports = { verifyAccount };
