@@ -1,33 +1,58 @@
 const fs = require("fs");
+const fsPromises = require("fs").promises;
+const path = require("path");
 const tinify = require("tinify");
 tinify.key = process.env.TINIFY_API_KEY;
 
-const optimizeFiles = async (files) => {
+const optimizeAndUploadFiles = async (files, folderName) => {
   const filesArray = Object.keys(files).map((key) => {
     return files[key];
   });
 
   const optimizedFiles = [];
 
+  try {
+    if (!fs.existsSync(path.join(__dirname, "..", "posts"))) {
+      await fsPromises.mkdir(path.join(__dirname, "..", "posts"));
+    }
+    if (!fs.existsSync(path.join(__dirname, "..", "posts", folderName))) {
+      await fsPromises.mkdir(path.join(__dirname, "..", "posts", folderName));
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
   for (let i = 0; i < filesArray.length; i++) {
     console.log("going in loop at: ", i);
-    tinify.fromBuffer(filesArray[i].data).toBuffer((error, resultData) => {
-      if (error) {
-        console.log(error);
-        return;
-      }
-      let fileName = `foto${i}.jpg`;
-
-      fs.writeFile(fileName, resultData, "binary", function (error) {
+    tinify
+      .fromBuffer(filesArray[i].data)
+      .toBuffer(async (error, resultData) => {
         if (error) {
-          console.log("ocorreu um erro: ", error);
-        } else console.log("ficheiro criado");
+          console.log(error);
+          return;
+        }
+        let fileName = `foto${i}.jpg`;
+
+        try {
+          await fsPromises.writeFile(
+            path.join(__dirname, "..", "posts", folderName, fileName),
+            resultData,
+            "binary",
+            function (error) {
+              if (error) {
+                console.log("ocorreu um erro: ", error);
+              } else console.log("ficheiro criado");
+            }
+          );
+        } catch (error) {
+          console.log("erro", error);
+        }
+
+        optimizedFiles.push(resultData);
       });
-      optimizedFiles.push(resultData);
-    });
   }
 
   return optimizedFiles;
 };
 
-module.exports = optimizeFiles;
+module.exports = optimizeAndUploadFiles;

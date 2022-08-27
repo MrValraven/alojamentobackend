@@ -1,11 +1,12 @@
 const Post = require("../model/Post");
-const path = require("path");
-const optimizeFiles = require("../middleware/fileOptimization");
+const optimizeAndUploadFiles = require("../middleware/fileOptimization");
 
 const createPost = async (request, response) => {
   const files = request.files;
 
-  await optimizeFiles(files);
+  const folderName = "anuncio1";
+
+  await optimizeAndUploadFiles(files, folderName);
 
   response.json({ message: "tihi" });
 };
