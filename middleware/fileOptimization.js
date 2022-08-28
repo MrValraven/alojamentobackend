@@ -23,7 +23,6 @@ const optimizeAndUploadFiles = async (files, folderName) => {
   }
 
   for (let i = 0; i < filesArray.length; i++) {
-    console.log("going in loop at: ", i);
     tinify
       .fromBuffer(filesArray[i].data)
       .toBuffer(async (error, resultData) => {
