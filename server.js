@@ -57,6 +57,7 @@ app.use("/edit", require("./routes/editUserInfo"));
 app.use("/verify", require("./routes/verify"));
 app.use("/email", require("./routes/email"));
 app.use("/post", require("./routes/post"));
+app.use("/forgotPassword", require("./routes/forgotPassword"));
 
 app.use(verifyJWT);
 

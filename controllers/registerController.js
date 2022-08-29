@@ -40,10 +40,16 @@ const handleNewUser = async (req, res) => {
 
     const urlToVerifyAccount = `https://alojamentoasap.vercel.app/verificar_conta/${newUser._id.toString()}`;
 
+    const messageInPlainText =
+      "A sua conta foi criada com sucesso!Por favor clique no link abaixo para verificar a sua conta";
+
+    const messageInHTML = `<h1>A sua conta foi criada com sucesso!</h1><p>Por favor clique no link abaixo para validar a sua conta</p><a href='${urlToVerifyAccount}'>${urlToVerifyAccount}</a>`;
+
     sendEmail(
       newUser.email,
       "A sua conta foi criada com sucesso",
-      urlToVerifyAccount
+      messageInPlainText,
+      messageInHTML
     );
 
     res

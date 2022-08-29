@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const nodemailer = require("nodemailer");
 
-const sendEmail = (email, subject, url) => {
+const sendEmail = (emailTo, subject, messageInPlainText, messageInHTML) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -13,14 +13,12 @@ const sendEmail = (email, subject, url) => {
 
   transporter.verify().then(console.log).catch(console.error);
 
-  console.log(email, url);
-
   let mailOptions = {
     from: "alojamento@aaue.pt",
-    to: email,
+    to: emailTo,
     subject: subject,
-    text: "A sua conta foi criada com sucesso!Por favor clique no link abaixo para verificar a sua conta",
-    html: `<h1>A sua conta foi criada com sucesso!</h1><p>Por favor clique no link abaixo para verificar a sua conta</p><a href='${url}'>${url}</a>`,
+    text: messageInPlainText,
+    html: messageInHTML,
   };
 
   transporter.sendMail(mailOptions, (error, data) => {
