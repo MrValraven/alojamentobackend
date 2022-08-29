@@ -18,16 +18,15 @@ const handleForgottenPassword = async (request, response) => {
 
   // Create a one time link valid for 15 minutes
 
-  const secret = process.env.ACCESS_TOKEN_SECRET + userFoundInDatabase.password;
+  const secret = process.env.ACCESS_TOKEN_SECRET;
 
   const payload = {
-    email: userFoundInDatabase.email,
     id: userFoundInDatabase.id,
   };
 
   const token = jwt.sign(payload, secret, { expiresIn: "15m" });
 
-  const link = `https://alojamentoasap.vercel.app/reset_palavra_passe/${userFoundInDatabase.id}/${token}`;
+  const link = `https://alojamentoasap.vercel.app/reset_palavra_passe/${token}`;
 
   const messageInPlainText =
     "Foi feito um pedido para repor a sua palavra passe. Por favor clique no link abaixo para efetuar a mudança.";

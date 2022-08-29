@@ -77,3 +77,5 @@
 20220829	22:51:47	e21a731f-53f1-4b98-8746-3aaf2d74fef0	POST	http://127.0.0.1:5173	/forgotPassword
 20220829	22:54:04	9de4b5e9-8a32-416d-b949-4a660520ca1e	OPTIONS	http://127.0.0.1:5173	/forgotPassword
 20220829	22:54:04	cbcbb7d0-c910-42fb-b2da-90e6ba0551cc	POST	http://127.0.0.1:5173	/forgotPassword
+20220830	00:10:55	07cbd052-4e44-4663-931e-7889635aeecd	GET	http://127.0.0.1:5173	/refresh
+20220830	00:10:55	ba8fb0fa-aed2-49cc-ad18-af3567d29e98	GET	http://127.0.0.1:5173	/refresh
