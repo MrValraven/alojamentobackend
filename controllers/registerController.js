@@ -36,7 +36,7 @@ const handleNewUser = async (req, res) => {
     });
 
     // Send email to verify account
-    console.log("account created");
+    console.log(`account created with email: ${email}`);
 
     const urlToVerifyAccount = `https://alojamentoasap.vercel.app/verificar_conta/${newUser._id.toString()}`;
 

@@ -58,6 +58,8 @@ app.use("/verify", require("./routes/verify"));
 app.use("/email", require("./routes/email"));
 app.use("/post", require("./routes/post"));
 app.use("/forgotPassword", require("./routes/forgotPassword"));
+app.use("/resetPassword", require("./routes/resetPassword"));
+app.use("/verifyToken", require("./routes/verifyToken"));
 
 app.use(verifyJWT);
 
@@ -76,7 +78,7 @@ app.all("*", (req, res) => {
 app.use(errorHandler);
 
 mongoose.connection.once("open", () => {
-  console.log("Connected to MongoDB database");
+  console.log("Connected to database");
 
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
