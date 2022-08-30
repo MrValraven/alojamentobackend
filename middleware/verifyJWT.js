@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 
 const verifyJWT = (request, response, next) => {
-  console.log("verifying");
   const authHeader = request.headers["authorization"];
 
   if (!authHeader)
@@ -14,7 +13,6 @@ const verifyJWT = (request, response, next) => {
       return response.status(403).json({ message: "Token has expired" });
 
     request.username = decoded.username;
-    console.log("token sucessfully verified");
     next();
   });
 };
