@@ -2,83 +2,99 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const postSchema = new Schema({
-  tipo: {
-    type: String,
-    required: false,
-  },
-  titulo: {
+  ownerId: {
     type: String,
     required: true,
   },
-  preco: {
+  publicationDate: {
+    type: Date,
+    required: true,
+  },
+  type: {
+    type: String,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  price: {
     type: Number,
     required: true,
   },
-  despesas_incluidas: {
-    type: Boolean,
-    required: true,
-  },
-  descricao: {
+  description: {
     type: String,
     required: true,
   },
-  fotos: {
+  photos: {
     type: Array,
     required: true,
   },
-  tipologia: {
+  typology: {
     type: String,
     required: true,
   },
-  genero_aceite: {
+  acceptedGender: {
     type: String,
     required: true,
   },
-  numero_casas_banho: {
+  isFurnished: {
+    type: Boolean,
+    required: true,
+  },
+  hasKitchen: {
+    type: Boolean,
+    required: true,
+  },
+  hasLivingRoom: {
+    type: Boolean,
+    required: true,
+  },
+  isLgbtFriendly: {
+    type: Boolean,
+    required: true,
+  },
+  isPetsAllowed: {
+    type: Boolean,
+    required: true,
+  },
+  isCouplesAllowed: {
+    type: Boolean,
+    required: true,
+  },
+  isSmokingAllowed: {
+    type: Boolean,
+    required: true,
+  },
+  isExpensesIncluded: {
+    type: Boolean,
+    required: true,
+  },
+  numberOfBathrooms: {
     type: Number,
-    required: false,
-  },
-  mobilado: {
-    type: Boolean,
     required: true,
   },
-  cozinha: {
-    type: Boolean,
-    required: true,
-  },
-  sala: {
-    type: Boolean,
-    required: true,
-  },
-  lgbt: {
-    type: Boolean,
-    required: true,
-  },
-  animais: {
-    type: Boolean,
-    required: true,
-  },
-  casais: {
-    type: Boolean,
-    required: true,
-  },
-  fumar: {
-    type: Boolean,
-    required: true,
-  },
-  endereco: {
+  address: {
     type: String,
     required: true,
   },
-  localidade: {
+  city: {
     type: String,
     required: true,
   },
-  codigo_postal: {
+  postalCode: {
     type: String,
     required: true,
   },
-  userId: {
+  contactName: {
+    type: String,
+    required: true,
+  },
+  contactNumber: {
+    type: String,
+    required: true,
+  },
+  contactEmail: {
     type: String,
     required: true,
   },
