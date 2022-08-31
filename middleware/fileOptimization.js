@@ -31,27 +31,26 @@ const optimizeAndUploadFiles = async (files, folderName) => {
           return;
         }
         let fileName = `foto${i}.jpg`;
-
         try {
-          await fsPromises.writeFile(
-            path.join(__dirname, "..", "posts", folderName, fileName),
-            resultData,
-            "binary",
-            function (error) {
-              if (error) {
-                console.log("ocorreu um erro: ", error);
-              } else console.log("ficheiro criado");
-            }
-          );
+          await fsPromises
+            .writeFile(
+              path.join(__dirname, "..", "posts", folderName, fileName),
+              resultData,
+              "binary",
+              function (error) {
+                if (error) {
+                  console.log("ocorreu um erro: ", error);
+                }
+              }
+            )
+            .then(() => {
+              console.log("ficheiro criado: " + `${folderName}/${fileName}`);
+            });
         } catch (error) {
           console.log("erro", error);
         }
-
-        optimizedFiles.push(resultData);
       });
   }
-
-  return optimizedFiles;
 };
 
 module.exports = optimizeAndUploadFiles;

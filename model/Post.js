@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const postSchema = new Schema({
+  postSlug: {
+    type: String,
+    required: true,
+  },
   ownerId: {
     type: String,
     required: true,

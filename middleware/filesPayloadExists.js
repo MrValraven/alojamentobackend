@@ -1,5 +1,5 @@
 const filesPayloadExists = (request, response, next) => {
-  if (!request.files) {
+  if (!request.body.photos) {
     return response
       .status(400)
       .json({ status: "error", message: "Missing files" });
