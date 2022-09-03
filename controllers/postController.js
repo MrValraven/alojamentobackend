@@ -29,14 +29,14 @@ const createPost = async (request, response) => {
     contactEmail,
   } = request.body;
   const counterId = "630f774f2acf439177bcfec7";
-  const files = request.body.photos;
+  const files = request.files["file"];
 
   const counter = await AutoCounter.findOne({ _id: counterId });
   const currentPostNumber = counter.count;
 
   const folderName = `anuncio${currentPostNumber}`;
 
-  const filesArrayLength = Object.keys(files).length;
+  const filesArrayLength = files.length;
 
   await optimizeAndUploadFiles(files, folderName);
 

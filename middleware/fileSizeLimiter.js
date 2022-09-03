@@ -2,15 +2,15 @@ const FIVE_MEGABYTES = 5;
 const FILE_SIZE_LIMIT = FIVE_MEGABYTES * 1024 * 1024;
 
 const fileSizeLimiter = (request, response, next) => {
-  const files = request.files;
+  const files = request.files["file"];
 
   const filesOverLimit = [];
 
   // Determine which files are over the limit
 
-  Object.keys(files).forEach((key) => {
-    if (files[key].size > FILE_SIZE_LIMIT) {
-      filesOverLimit.push(files[key].name);
+  files.forEach((file) => {
+    if (file.size > FILE_SIZE_LIMIT) {
+      filesOverLimit.push(file.name);
     }
   });
 

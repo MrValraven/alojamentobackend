@@ -2,12 +2,12 @@ const path = require("path");
 
 const fileExtensionLimiter = (allowedExtensionsArray) => {
   return (request, response, next) => {
-    const files = request.files;
+    const files = request.files["file"];
 
     const fileExtensions = [];
 
-    Object.keys(files).forEach((key) => {
-      fileExtensions.push(path.extname(files[key].name));
+    files.forEach((file) => {
+      fileExtensions.push(path.extname(file.name));
     });
 
     // Are the file extensions allowed?
