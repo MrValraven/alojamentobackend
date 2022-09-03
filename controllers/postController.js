@@ -88,4 +88,24 @@ const createPost = async (request, response) => {
   }
 };
 
-module.exports = { createPost };
+const getAllPosts = async (request, response) => {
+  const posts = await Post.find({}).sort({ createdAt: -1 });
+
+  if (!posts) {
+    return response.status(400).send("Error! No posts available");
+  }
+
+  response.send(posts);
+};
+
+const getPostById = async (request, response) => {
+  const post = await Post.findOne({ postSlug: request.params.postSlug });
+
+  if (!post) {
+    return response.status(400).send("Error! Post doesn't exist");
+  }
+
+  response.send(post);
+};
+
+module.exports = { createPost, getAllPosts, getPostById };

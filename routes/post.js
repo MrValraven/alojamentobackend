@@ -15,4 +15,8 @@ router.post(
   postController.createPost
 );
 
+router.get("/", postController.getAllPosts);
+
+router.get("/:postSlug", postController.getPostById);
+
 module.exports = router;
