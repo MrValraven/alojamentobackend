@@ -48,17 +48,18 @@ app.get("/", (req, res) => {
 });
 
 //routes
-app.use("/register", require("./routes/register"));
 app.use("/auth", require("./routes/auth"));
-app.use("/refresh", require("./routes/refresh"));
-app.use("/logout", require("./routes/logout"));
-app.use("/users", require("./routes/users"));
 app.use("/edit", require("./routes/editUserInfo"));
-app.use("/verify", require("./routes/verify"));
 app.use("/email", require("./routes/email"));
-app.use("/post", require("./routes/post"));
 app.use("/forgotPassword", require("./routes/forgotPassword"));
+app.use("/images", require("./routes/images"));
+app.use("/logout", require("./routes/logout"));
+app.use("/post", require("./routes/post"));
+app.use("/refresh", require("./routes/refresh"));
+app.use("/register", require("./routes/register"));
 app.use("/resetPassword", require("./routes/resetPassword"));
+app.use("/users", require("./routes/users"));
+app.use("/verify", require("./routes/verify"));
 app.use("/verifyToken", require("./routes/verifyToken"));
 
 app.use(verifyJWT);
