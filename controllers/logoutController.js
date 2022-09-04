@@ -23,8 +23,6 @@ const handleLogout = async (request, response) => {
   userFoundInDatabase.refreshToken = "";
   const result = await userFoundInDatabase.save();
 
-  console.log(result);
-
   response.clearCookie("jwt", {
     httpOnly: true,
     sameSite: "None",
