@@ -48,6 +48,11 @@ const createPost = async (request, response) => {
     postPhotos.push(`${folderName}/foto${i}.jpg`);
   }
 
+  const user = await User.findOne({ email: contactEmail });
+  user.posts.push(currentPostNumber);
+
+  const result = await user.save();
+
   try {
     //create and store the new user
     const newPost = await Post.create({
@@ -89,11 +94,6 @@ const createPost = async (request, response) => {
     console.log("error on post creation: ", error);
     response.json({ message: "error" });
   }
-
-  const user = await User.findOne({ email: contactEmail });
-  user.posts.push(currentPostNumber);
-
-  const result = await user.save();
 };
 
 const getAllPosts = async (request, response) => {
