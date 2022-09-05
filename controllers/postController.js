@@ -6,6 +6,7 @@ const createPost = async (request, response) => {
   const {
     ownerId,
     publicationDate,
+    publicationDateString,
     type,
     title,
     price,
@@ -52,6 +53,7 @@ const createPost = async (request, response) => {
       postSlug: currentPostNumber,
       ownerId,
       publicationDate,
+      publicationDateString,
       type,
       title,
       price,

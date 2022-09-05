@@ -14,6 +14,10 @@ const postSchema = new Schema({
     type: Date,
     required: true,
   },
+  publicationDateString: {
+    type: String,
+    required: true,
+  },
   type: {
     type: String,
     required: true,
