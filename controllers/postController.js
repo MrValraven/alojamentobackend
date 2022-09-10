@@ -97,7 +97,7 @@ const createPost = async (request, response) => {
 };
 
 const getAllPosts = async (request, response) => {
-  const posts = await Post.find({}).sort({ createdAt: -1 });
+  const posts = await Post.find({}).sort({ publicationDate: -1 });
 
   if (!posts) {
     return response.status(400).send("Error! No posts available");
