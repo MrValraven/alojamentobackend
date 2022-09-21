@@ -19,4 +19,6 @@ router.get("/", postController.getAllPosts);
 
 router.get("/:postSlug", postController.getPostById);
 
+router.get("/allposts/:owner_id", postController.getPostsByOwnerId);
+
 module.exports = router;

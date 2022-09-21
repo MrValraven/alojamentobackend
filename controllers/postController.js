@@ -116,4 +116,14 @@ const getPostById = async (request, response) => {
   response.send(post);
 };
 
-module.exports = { createPost, getAllPosts, getPostById };
+const getPostsByOwnerId = async (request, response) => {
+  const post = await Post.find({ ownerId: request.params.owner_id });
+
+  if (!post) {
+    return response.status(400).send("Error! Post doesn't exist");
+  }
+
+  response.send(post);
+};
+
+module.exports = { createPost, getAllPosts, getPostById, getPostsByOwnerId };
