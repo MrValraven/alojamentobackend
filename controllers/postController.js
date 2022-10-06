@@ -126,4 +126,23 @@ const getPostsByOwnerId = async (request, response) => {
   response.status(200).send(post);
 };
 
-module.exports = { createPost, getAllPosts, getPostById, getPostsByOwnerId };
+const deletePostBySlug = async (request, response) => {
+  const post = await Post.deleteOne({
+    postSlug: request.params.postSlug,
+  });
+
+  console.log(post);
+
+  if (!post.deletedCount) {
+    return response.status(400).send("Error! Post doesn't exist");
+  }
+
+  response.status(200).json({ message: "Post deleted sucessfully" });
+};
+module.exports = {
+  createPost,
+  getAllPosts,
+  getPostById,
+  getPostsByOwnerId,
+  deletePostBySlug,
+};
