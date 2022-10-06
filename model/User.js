@@ -30,10 +30,6 @@ const userSchema = new Schema({
     },
     admin: String,
   },
-  posts: {
-    type: Array,
-    required: false,
-  },
   isVerified: {
     type: Boolean,
     required: true,
