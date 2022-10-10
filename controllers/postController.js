@@ -30,10 +30,9 @@ const createPost = async (request, response) => {
     contactNumber,
     contactEmail,
   } = request.body;
-  const counterId = "630f774f2acf439177bcfec7";
   const files = request.files["file"];
 
-  const counter = await AutoCounter.findOne({ _id: counterId });
+  const counter = await AutoCounter.findOne();
   const currentPostNumber = counter.count;
 
   const folderName = `anuncio${currentPostNumber}`;
@@ -47,11 +46,6 @@ const createPost = async (request, response) => {
   for (let i = 0; i < filesArrayLength; i++) {
     postPhotos.push(`${folderName}/foto${i}.jpg`);
   }
-
-  const user = await User.findOne({ email: contactEmail });
-  user.posts.push(currentPostNumber);
-
-  const result = await user.save();
 
   try {
     //create and store the new user
