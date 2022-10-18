@@ -133,10 +133,71 @@ const deletePostBySlug = async (request, response) => {
 
   response.status(200).json({ message: "Post deleted sucessfully" });
 };
+
+const editPost = async (request, response) => {
+  try {
+    const {
+      title,
+      price,
+      description,
+      typology,
+      acceptedGender,
+      isFurnished,
+      hasKitchen,
+      hasLivingRoom,
+      isLgbtFriendly,
+      isPetsAllowed,
+      isCouplesAllowed,
+      isSmokingAllowed,
+      isExpensesIncluded,
+      numberOfBathrooms,
+      address,
+      city,
+      postalCode,
+    } = request.body;
+
+    const post = await Post.findOneAndUpdate(
+      {
+        postSlug: request.params.postSlug,
+      },
+      {
+        title: title,
+        price: price,
+        description: description,
+        typology: typology,
+        acceptedGender: acceptedGender,
+        isFurnished: isFurnished,
+        hasKitchen: hasKitchen,
+        hasLivingRoom: hasLivingRoom,
+        isLgbtFriendly: isLgbtFriendly,
+        isPetsAllowed: isPetsAllowed,
+        isCouplesAllowed: isCouplesAllowed,
+        isSmokingAllowed: isSmokingAllowed,
+        isExpensesIncluded: isExpensesIncluded,
+        numberOfBathrooms: numberOfBathrooms,
+        address: address,
+        city: city,
+        postalCode: postalCode,
+      },
+      {
+        new: true,
+      }
+    );
+
+    if (!post) {
+      return response.status(400).send("Error! Post doesn't exist");
+    }
+
+    response.status(200).json({ message: "Post updated sucessfully" });
+  } catch (error) {
+    console.log(error);
+  }
+};
 module.exports = {
   createPost,
   getAllPosts,
   getPostById,
   getPostsByOwnerId,
   deletePostBySlug,
+  editPost,
 };

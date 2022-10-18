@@ -21,6 +21,8 @@ router.get("/:postSlug", postController.getPostById);
 
 router.delete("/:postSlug", postController.deletePostBySlug);
 
+router.put("/:postSlug", postController.editPost);
+
 router.get("/allposts/:owner_id", postController.getPostsByOwnerId);
 
 module.exports = router;
