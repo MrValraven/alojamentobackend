@@ -74,7 +74,6 @@ app.use("/post", require("./routes/post"));
 app.use("/refresh", require("./routes/refresh"));
 app.use("/register", require("./routes/register"));
 app.use("/resetPassword", require("./routes/resetPassword"));
-app.use("/status", require("./routes/status"));
 app.use("/users", require("./routes/users"));
 app.use("/verify", require("./routes/verify"));
 app.use("/verifyToken", require("./routes/verifyToken"));
@@ -103,4 +102,3 @@ mongoose.connection.once("open", () => {
    
     https.createServer(certbot_credentials, app).listen(PORT, () => { console.log(`Server running on port ${PORT}`); })
 })});
-
