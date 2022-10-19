@@ -13,7 +13,7 @@ const corsOptions = require("./config/corsOptions");
 const mongoose = require("mongoose");
 const connectToDatabase = require("./config/databaseConnection");
 const { Http2ServerRequest } = require("http2");
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3500;
 var https = require('https')
 var pem = require('pem')
 const fs = require('fs');
@@ -21,12 +21,12 @@ const fs = require('fs');
 // Certificate
 const privateKey = fs.readFileSync('/etc/letsencrypt/live/alojamentoapi.aaue.pt/privkey.pem', 'utf8');
 const certificate = fs.readFileSync('/etc/letsencrypt/live/alojamentoapi.aaue.pt/cert.pem', 'utf8');
-const ca = fs.readFileSync('/etc/letsencrypt/live/alojamentoapi.aaue.pt/chain.pem', 'utf8');
+const certificateAuthority = fs.readFileSync('/etc/letsencrypt/live/alojamentoapi.aaue.pt/chain.pem', 'utf8');
 
-const certbot_credentials = {
+const certbotCredentials = {
 	key: privateKey,
 	cert: certificate,
-	ca: ca
+	ca: certificateAuthority
 };
 
 // Connect to MongoDB
@@ -101,6 +101,6 @@ mongoose.connection.once("open", () => {
   pem.createCertificate({ days: 1, selfSigned: true}, (err,keys) => {
     if (err) { throw err }
    
-    https.createServer(certbot_credentials, app).listen(PORT, () => { console.log(`Server running on port ${PORT}`); })
+    https.createServer(certbotCredentials, app).listen(PORT, () => { console.log(`Server running on port ${PORT}`); })
 })});
 
