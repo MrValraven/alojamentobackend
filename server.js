@@ -12,22 +12,9 @@ const subdirRouter = require("./routes/subdir");
 const corsOptions = require("./config/corsOptions");
 const mongoose = require("mongoose");
 const connectToDatabase = require("./config/databaseConnection");
-const { Http2ServerRequest } = require("http2");
 const PORT = process.env.PORT || 3500;
-var https = require('https')
-var pem = require('pem')
-const fs = require('fs');
-
-// Certificate
-const privateKey = fs.readFileSync('/etc/letsencrypt/live/alojamentoapi.aaue.pt/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('/etc/letsencrypt/live/alojamentoapi.aaue.pt/cert.pem', 'utf8');
-const certificateAuthority = fs.readFileSync('/etc/letsencrypt/live/alojamentoapi.aaue.pt/chain.pem', 'utf8');
-
-const certbotCredentials = {
-	key: privateKey,
-	cert: certificate,
-	ca: certificateAuthority
-};
+const https = require("https");
+const fs = require("fs");
 
 // Connect to MongoDB
 connectToDatabase();
@@ -55,7 +42,7 @@ app.use(cookieParser());
 // serve static files
 app.use("/", express.static(path.join(__dirname, "/public")));
 app.use("/subdir", express.static(path.join(__dirname, "/public")));
-app.use(express.static(__dirname, { dotfiles: 'allow'}));
+app.use(express.static(__dirname, { dotfiles: "allow" }));
 
 app.use("/subdir", subdirRouter);
 
@@ -98,9 +85,46 @@ app.use(errorHandler);
 mongoose.connection.once("open", () => {
   console.log("Connected to database");
 
-  pem.createCertificate({ days: 1, selfSigned: true}, (err,keys) => {
-    if (err) { throw err }
-   
-    https.createServer(certbotCredentials, app).listen(PORT, () => { console.log(`Server running on port ${PORT}`); })
-})});
+  const serverIsInProductionMode = process.env.isProduction;
 
+  if (serverIsInProductionMode) {
+    const pem = require("pem");
+
+    // Certificate
+    const privateKey = fs.readFileSync(
+      "/etc/letsencrypt/live/alojamentoapi.aaue.pt/privkey.pem",
+      "utf8"
+    );
+    const certificate = fs.readFileSync(
+      "/etc/letsencrypt/live/alojamentoapi.aaue.pt/cert.pem",
+      "utf8"
+    );
+    const certificateAuthority = fs.readFileSync(
+      "/etc/letsencrypt/live/alojamentoapi.aaue.pt/chain.pem",
+      "utf8"
+    );
+
+    const certbotCredentials = {
+      key: privateKey,
+      cert: certificate,
+      ca: certificateAuthority,
+    };
+
+    pem.createCertificate({ days: 1, selfSigned: true }, (err, keys) => {
+      if (err) {
+        throw err;
+      }
+
+      https.createServer(certbotCredentials, app).listen(PORT, () => {
+        console.log(
+          `Server running on port ${PORT}.\nCurrent build: PRODUCTION`
+        );
+      });
+    });
+  } else {
+  }
+
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}.\nCurrent build: DEV`);
+  });
+});
