@@ -57,7 +57,7 @@ app.use("/email", require("./routes/email"));
 app.use("/forgotPassword", require("./routes/forgotPassword"));
 app.use("/images", require("./routes/images"));
 app.use("/logout", require("./routes/logout"));
-app.use("/post", require("./routes/post"));
+app.use("/posts", require("./routes/post"));
 app.use("/refresh", require("./routes/refresh"));
 app.use("/register", require("./routes/register"));
 app.use("/resetPassword", require("./routes/resetPassword"));
