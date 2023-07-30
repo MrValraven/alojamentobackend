@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 const fs = require('fs');
 const fsPromises = require('fs').promises;
 const path = require('path');
@@ -42,7 +43,7 @@ const optimizeAndUploadFiles = async (files, folderName) => {
             console.log('ficheiro criado: ' + `${folderName}/${fileName}`);
           });
       } catch (error) {
-        console.log('erro', error);
+        console.log('Error', error);
       }
     });
   }

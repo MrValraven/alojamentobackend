@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable operator-linebreak */
 const FIVE_MEGABYTES = 5;
 const FILE_SIZE_LIMIT = FIVE_MEGABYTES * 1024 * 1024;
