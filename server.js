@@ -6,6 +6,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const pem = require('pem');
+const router = require('./routes')
 
 const app = express();
 const cors = require('cors');
@@ -29,9 +30,10 @@ app.use(logger);
 app.use(credentials);
 
 // CORS
-app.use(cors(corsOptions));
+app.use(cors('*'));
+/* app.use(cors(corsOptions));
 
-// Middleware to handle urlencoded data ie: form data
+ */// Middleware to handle urlencoded data ie: form data
 // 'content-type: 'application/x-www-form-urlencoded'
 app.use(express.urlencoded({ extended: false }));
 
@@ -50,20 +52,10 @@ app.get('/', (req, res) => {
 });
 
 // Routes
-app.use('/routes.js');
-app.use(verifyJWT);
+app.use('/', router);
+/* app.use(verifyJWT); */
 
-app.all('*', (req, res) => {
-  res.status(404);
-
-  if (req.accepts('html')) {
-    res.sendFile(path.join(__dirname, 'views', '404.html'));
-  } else {
-    res.type('txt').send('404 Not found');
-  }
-});
-
-app.use(errorHandler);
+/* app.use(errorHandler); */
 
 mongoose.connection.once('open', () => {
   console.log('Connected to database');

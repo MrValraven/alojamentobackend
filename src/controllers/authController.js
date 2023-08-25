@@ -55,7 +55,7 @@ const handleLogin = async (request, response) => {
     response.status(401).json({ message: 'Wrong password' });
   }
 
-  const { accessToken, refreshToken } = await addJwtAuthToUser();
+  const { accessToken, refreshToken } = await addJwtAuthToUser(user);
   const { username, name, phoneNumber, posts } = user;
   const roles = Object.values(user.roles).filter(Boolean);
   const ONE_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;

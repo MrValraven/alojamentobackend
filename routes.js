@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const fileUpload = require('express-fileupload');
 const authController = require('./src/controllers/authController');
-const imagesController = require('./src/controllers/imagesController');
+const { getImage } = require('./src/controllers/imagesController');
 const postsController = require('./src/controllers/postsController');
 const statusController = require('./src/controllers/statusController');
 const usersController = require('./src/controllers/usersController');
@@ -42,6 +42,6 @@ router.post(
 router.delete('/posts/:postSlug', postsController.deletePostBySlug);
 router.put('/posts/:postSlug', postsController.editPost);
 
-router.get('images/:folder/:imageName', imagesController.getImage);
+router.get('/images/:folder/:imageName', getImage);
 
 module.exports = router;
